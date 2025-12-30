@@ -1,10 +1,11 @@
 import express from "express";
-import { addShow, getNowPlayingMovies, getShow, getShows } from "../controllers/showController.js";
+import { addShow, getBollywoodMovies, getNowPlayingMovies, getShow, getShows } from "../controllers/showController.js";
 import { protectAdmin } from "../middleware/auth.js";
 
 const showRouter = express.Router();
 
-showRouter.get('/now-playing',protectAdmin, getNowPlayingMovies)
+showRouter.get('/now-playing', protectAdmin, getNowPlayingMovies)
+showRouter.get('/bollywood', protectAdmin, getBollywoodMovies)
 showRouter.post('/add', protectAdmin, addShow)
 showRouter.get("/all", getShows)
 showRouter.get("/:movieId", getShow)

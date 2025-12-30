@@ -17,6 +17,7 @@ import ListBookings from './pages/admin/ListBookings'
 import { useAppContext } from './context/AppContext'
 import { SignIn } from '@clerk/clerk-react'
 import Loading from './components/Loading'
+import CineBot from './components/CineBot'
 
 const App = () => {
 
@@ -27,28 +28,29 @@ const App = () => {
   return (
     <>
       <Toaster />
-      {!isAdminRoute && <Navbar/>}
+      {!isAdminRoute && <Navbar />}
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/movies' element={<Movies/>} />
-        <Route path='/movies/:id' element={<MovieDetails/>} />
-        <Route path='/movies/:id/:date' element={<SeatLayout/>} />
-        <Route path='/my-bookings' element={<MyBookings/>} />
-        <Route path='/loading/:nextUrl' element={<Loading/>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/movies' element={<Movies />} />
+        <Route path='/movies/:id' element={<MovieDetails />} />
+        <Route path='/movies/:id/:date' element={<SeatLayout />} />
+        <Route path='/my-bookings' element={<MyBookings />} />
+        <Route path='/loading/:nextUrl' element={<Loading />} />
 
-        <Route path='/favorite' element={<Favorite/>} />
-        <Route path='/admin/*' element={user ? <Layout/> : (
+        <Route path='/favorite' element={<Favorite />} />
+        <Route path='/admin/*' element={user ? <Layout /> : (
           <div className='min-h-screen flex justify-center items-center'>
             <SignIn fallbackRedirectUrl={'/admin'} />
           </div>
         )}>
-          <Route index element={<Dashboard/>}/>
-          <Route path="add-shows" element={<AddShows/>}/>
-          <Route path="list-shows" element={<ListShows/>}/>
-          <Route path="list-bookings" element={<ListBookings/>}/>
+          <Route index element={<Dashboard />} />
+          <Route path="add-shows" element={<AddShows />} />
+          <Route path="list-shows" element={<ListShows />} />
+          <Route path="list-bookings" element={<ListBookings />} />
         </Route>
       </Routes>
-       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <CineBot />}
     </>
   )
 }

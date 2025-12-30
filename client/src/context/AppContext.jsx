@@ -8,7 +8,7 @@ axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 
 export const AppContext = createContext()
 
-export const AppProvider = ({ children })=>{
+export const AppProvider = ({ children }) => {
 
     const [isAdmin, setIsAdmin] = useState(false)
     const [shows, setShows] = useState([])
@@ -16,31 +16,36 @@ export const AppProvider = ({ children })=>{
 
     const image_base_url = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
 
-    const {user} = useUser()
-    const {getToken} = useAuth()
+    const { user } = useUser()
+    const { getToken } = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
 
-    const fetchIsAdmin = async ()=>{
+    const fetchIsAdmin = async () => {
         try {
-            const {data} = await axios.get('/api/admin/is-admin', {headers: {Authorization: `Bearer ${await getToken()}`}})
+            const token = await getToken();
+            console.log("fetchIsAdmin: Token available?", !!token);
+
+            const { data } = await axios.get('/api/admin/is-admin', { headers: { Authorization: `Bearer ${token}` } })
+            console.log("fetchIsAdmin: API Response:", data);
+
             setIsAdmin(data.isAdmin)
 
-            if(!data.isAdmin && location.pathname.startsWith('/admin')){
+            if (!data.isAdmin && location.pathname.startsWith('/admin')) {
                 navigate('/')
                 toast.error('You are not authorized to access admin dashboard')
             }
         } catch (error) {
-            console.error(error)
+            console.error("fetchIsAdmin: Error:", error)
         }
     }
 
-    const fetchShows = async ()=>{
+    const fetchShows = async () => {
         try {
             const { data } = await axios.get('/api/show/all')
-            if(data.success){
+            if (data.success) {
                 setShows(data.shows)
-            }else{
+            } else {
                 toast.error(data.message)
             }
         } catch (error) {
@@ -48,13 +53,13 @@ export const AppProvider = ({ children })=>{
         }
     }
 
-    const fetchFavoriteMovies = async ()=>{
+    const fetchFavoriteMovies = async () => {
         try {
-            const { data } = await axios.get('/api/user/favorites', {headers: {Authorization: `Bearer ${await getToken()}`}})
+            const { data } = await axios.get('/api/user/favorites', { headers: { Authorization: `Bearer ${await getToken()}` } })
 
-            if(data.success){
+            if (data.success) {
                 setFavoriteMovies(data.movies)
-            }else{
+            } else {
                 toast.error(data.message)
             }
         } catch (error) {
@@ -62,29 +67,29 @@ export const AppProvider = ({ children })=>{
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchShows()
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        if(user){
+    useEffect(() => {
+        if (user) {
             fetchIsAdmin()
             fetchFavoriteMovies()
         }
-    },[user])
+    }, [user])
 
     const value = {
         axios,
         fetchIsAdmin,
-        user, getToken, navigate, isAdmin, shows, 
+        user, getToken, navigate, isAdmin, shows,
         favoriteMovies, fetchFavoriteMovies, image_base_url
     }
 
     return (
         <AppContext.Provider value={value}>
-            { children }
+            {children}
         </AppContext.Provider>
     )
 }
 
-export const useAppContext = ()=> useContext(AppContext)
+export const useAppContext = () => useContext(AppContext)

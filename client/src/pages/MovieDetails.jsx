@@ -9,15 +9,14 @@ import MovieCard from '../components/MovieCard'
 import Loading from '../components/Loading'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
-import TheaterLocator from '../components/TheaterLocator'
+
 
 const MovieDetails = () => {
 
   const navigate = useNavigate()
   const { id } = useParams()
   const [show, setShow] = useState(null)
-  const [city, setCity] = useState("")
-  const [selectedTheater, setSelectedTheater] = useState(null)
+
 
   const { shows, axios, getToken, user, fetchFavoriteMovies, favoriteMovies, image_base_url } = useAppContext()
 
@@ -94,7 +93,7 @@ const MovieDetails = () => {
               <PlayCircleIcon className="w-5 h-5" />
               Watch Trailer
             </button>
-            <a href="#theaterSelect" className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer active:scale-95'>Buy Tickets</a>
+            <a href="#dateSelect" className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer active:scale-95'>Buy Tickets</a>
             <button onClick={handleFavorite} className='bg-gray-700 p-2.5 rounded-full transition cursor-pointer active:scale-95'>
               <Heart className={`w-5 h-5 ${favoriteMovies.find(movie => movie._id === id) ? 'fill-primary text-primary' : ""} `} />
             </button>
@@ -114,30 +113,10 @@ const MovieDetails = () => {
         </div>
       </div>
 
-      <div id="theaterSelect" className="mt-10 mb-10">
-        <div className="flex items-center gap-4 mb-4">
-          <label className="text-gray-300 font-medium">Find theaters in:</label>
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="bg-gray-800 text-white px-4 py-2 rounded-md border border-gray-700 focus:border-primary outline-none"
-            placeholder="Enter city..."
-          />
-        </div>
-        <TheaterLocator
-          movieTitle={show.movie.title}
-          city={city}
-          onSelectTheater={(theater) => {
-            setSelectedTheater(theater);
-            toast.success(`Selected ${theater}. Please choose a date.`);
-            document.getElementById('dateSelect').scrollIntoView({ behavior: 'smooth' });
-          }}
-        />
-      </div>
+
 
       <div id="dateSelect">
-        <DateSelect dateTime={show.dateTime} id={id} selectedTheater={selectedTheater} />
+        <DateSelect dateTime={show.dateTime} id={id} />
       </div>
 
       <p className='text-lg font-medium mt-20 mb-8'>You May Also Like</p>

@@ -4,16 +4,13 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
-const DateSelect = ({ dateTime, id, selectedTheater }) => {
+const DateSelect = ({ dateTime, id }) => {
 
   const navigate = useNavigate();
 
   const [selected, setSelected] = useState(null)
 
   const onBookHandler = () => {
-    if (!selectedTheater) {
-      return toast.error('Please select a theater first')
-    }
     if (!selected) {
       return toast.error('Please select a date')
     }

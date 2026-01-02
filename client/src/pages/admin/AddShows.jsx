@@ -29,11 +29,15 @@ const AddShows = () => {
             const { data } = await axios.get(endpoint, {
                 headers: { Authorization: `Bearer ${await getToken()}` }
             })
-            if (data.success) {
+            if (data.success && data.movies && data.movies.length > 0) {
                 setNowPlayingMovies(data.movies)
+            } else {
+                // Fallback to dummy data if API returns success but no movies, or other logical issues
+                setNowPlayingMovies(dummyShowsData);
             }
         } catch (error) {
-            console.error('Error fetching movies:', error)
+            console.log('Error fetching movies, using dummy data:', error)
+            setNowPlayingMovies(dummyShowsData);
         }
     };
 

@@ -36,7 +36,15 @@ You must interact with the user to understand their taste. Use the following "FA
     * If the user is not logged in (User Bookings section says "Not authenticated"), say "Please log in to view your bookings."
 
 ### Simulated Movie Database (Use these for recommendations)
-* *Bollywood:* ​"Five Nights at Freddy's" (Horror, Mystery, Thriller, UA), ​"Me No Pause Me Play" (Drama, Social, UA 13+), ​"Vellakuthira" (Drama, U),​"Flirt" (Comedy, Romance, Thriller, UA),​"Yaksha" (Action, Drama, A), ​"Bank of Bhagyalakshmi" (Action, Comedy, Crime, UA), ​"Eternity" (Comedy, Fantasy, Romance, UA 16+), ​"Asambhav" (Mystery, Romance, Thriller, UA 16+), ​"Full Meals" (Comedy, Romance, UA), ​"The Task" (Thriller, Drama, UA), ​"Hi Zindagi" (Comedy, Drama, Thriller, A), "Tere Iskh Mein" (Romance, Drama, UA), "Mastii 4" (Comedy, UA), "De De pyar De 2" (Comedy, Romance, UA), "Dhurandhar" ( Action, Crime, UA), ​"Gustaakh Ishq" (Romantic ,Drama, UA), "120 Bahadur" (War, Action, UA), "Rangbaaz: The Bihari Chapter" (Crime, Action, UA 13+), "Kaisi Yeh Paheli" (Murder, Mystery, UA), ​"Dining with the Kapoors" (Reality, Documentary, UA 7+), "Baramulla" (Paranormal, Thriller, UA 16+), .
+* *Bollywood:* ​​"Avatar: Fire and Ash" (Sci-Fi, Action, Adventure, Fantasy, UA 16+),
+​"Tu Meri Main Tera Tu Meri" (Comedy, Romance, Drama, UA 16+),
+​"45" (Action, Drama, Thriller, UA 16+),
+​"Anaconda" (Action, Adventure, Horror, Comedy, UA 16+),
+​"Sitaaron ke Sitaare" (Documentary, U),
+​"Ikkis" (War, Drama, Biography, UA 13+),
+​"Sholay: The Final Cut" (Action, Adventure, Comedy, Drama, U),
+​"Kis Kisko Pyaar Karoon 2" (Comedy, Drama, Romantic, UA 16+),
+​"Apna Amitabh" (Comedy, Drama, Family, UA), .
 
 ### Constraints
 * Keep responses short (under 3 sentences).

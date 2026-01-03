@@ -43,7 +43,7 @@ const CineBot = () => {
             }));
 
             const token = await getToken();
-            const response = await axios.post('http://localhost:3000/api/cinebot/chat', {
+            const response = await axios.post('http://cinemax-server-rho.vercel.app/api/cinebot/chat', {
                 message: input,
                 history: historyForApi
             }, {

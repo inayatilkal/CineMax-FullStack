@@ -7,7 +7,7 @@ import { useAuth } from '@clerk/clerk-react';
 const CineBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { role: 'model', text: "Hi there! I'm CineBot. Are you in the mood for some a Bollywood drama or action or horror today?" }
+        { role: 'model', text: "Hi there! I'm CineBot. Are you in the mood for some Bollywood drama or action or horror today?" }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -163,7 +163,7 @@ const CineBot = () => {
             {/* Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 flex items-center justify-center"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 flex items-center justify-center cursor-pointer"
             >
                 {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
             </button>

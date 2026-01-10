@@ -1,6 +1,7 @@
 import { clerkClient } from "@clerk/express";
 import Booking from "../models/Booking.js";
 import Movie from "../models/Movie.js";
+import stripe from "stripe";
 
 
 // API Controller Function to Get User Bookings
@@ -12,7 +13,27 @@ export const getUserBookings = async (req, res) => {
             path: "show",
             populate: { path: "movie" }
         }).sort({ createdAt: -1 })
-        res.json({ success: true, bookings })
+
+        // Check for unpaid bookings with Stripe session
+        const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
+
+        const updatedBookings = await Promise.all(bookings.map(async (booking) => {
+            if (!booking.isPaid && booking.paymentSessionId) {
+                try {
+                    const session = await stripeInstance.checkout.sessions.retrieve(booking.paymentSessionId);
+                    if (session.payment_status === 'paid') {
+                        booking.isPaid = true;
+                        booking.paymentLink = ""; // Clear payment link as it's no longer needed
+                        await booking.save();
+                    }
+                } catch (error) {
+                    console.error(`Failed to verify payment for booking ${booking._id}:`, error.message);
+                }
+            }
+            return booking;
+        }));
+
+        res.json({ success: true, bookings: updatedBookings })
     } catch (error) {
         console.error(error.message);
         res.json({ success: false, message: error.message });

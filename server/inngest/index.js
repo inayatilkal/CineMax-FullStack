@@ -101,7 +101,7 @@ const sendBookingConfirmationEmail = inngest.createFunction(
                             <strong>Time:</strong> ${new Date(booking.show.showDateTime).toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata' })}
                         </p>
                         <p>Enjoy the show! 🍿</p>
-                        <p>Thanks for booking with us!<br/>— QuickShow Team</p>
+                        <p>Thanks for booking with us!<br/>— CineMax Team</p>
                     </div>`
         })
     }
@@ -165,7 +165,7 @@ const sendShowReminders = inngest.createFunction(
                             </p>
                             <p>It starts in approximately <strong>8 hours</strong> - make sure you're ready!</p>
                             <br/>
-                            <p>Enjoy the show!<br/>QuickShow Team</p>
+                            <p>Enjoy the show!<br/>CineMax Team</p>
                         </div>`
                 }))
             )
@@ -200,9 +200,9 @@ const sendNewShowNotifications = inngest.createFunction(
                     <h2>Hi ${userName},</h2>
                     <p>We've just added a new show to our library:</p>
                     <h3 style="color: #F84565;">"${movieTitle}"</h3>
-                    <p>Visit our website</p>
+                    <p>Visit our website: https://cinemax-client-two.vercel.app/</p>
                     <br/>
-                    <p>Thanks,<br/>QuickShow Team</p>
+                    <p>Thanks,<br/>CineMax Team</p>
                 </div>`;
 
             await sendEmail({

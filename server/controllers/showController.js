@@ -178,7 +178,6 @@ export const getShows = async (req, res) => {
     try {
         const shows = await Show.find({ showDateTime: { $gte: new Date() } }).populate('movie').sort({ showDateTime: 1 });
 
-        // filter unique shows
         const uniqueMoviesMap = new Map();
 
         shows.forEach(show => {
@@ -188,14 +187,10 @@ export const getShows = async (req, res) => {
             if (!uniqueMoviesMap.has(movieId)) {
                 uniqueMoviesMap.set(movieId, {
                     ...show.movie.toObject(),
-                    minPrice: show.showPrice
+                    // minPrice: show.showPrice  <-- REMOVED
                 });
-            } else {
-                const existing = uniqueMoviesMap.get(movieId);
-                if (show.showPrice < existing.minPrice) {
-                    existing.minPrice = show.showPrice;
-                }
             }
+            // Logic to find minPrice is no longer needed since we are not showing it
         });
 
         res.json({ success: true, shows: Array.from(uniqueMoviesMap.values()) })
@@ -242,7 +237,7 @@ export const getShow = async (req, res) => {
             if (!dateTime[date]) {
                 dateTime[date] = []
             }
-            dateTime[date].push({ time: show.showDateTime, showId: show._id })
+            dateTime[date].push({ time: show.showDateTime, showId: show._id, price: show.showPrice }) // Added price here
         })
 
         res.json({ success: true, movie, dateTime })

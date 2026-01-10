@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
 import { ArrowRightIcon, ClockIcon } from 'lucide-react'
 import isoTimeFormat from '../lib/isoTimeFormat'
+import { currencyFormat } from '../lib/currencyFormat'
 import BlurCircle from '../components/BlurCircle'
 import toast from 'react-hot-toast'
 import { useAppContext } from '../context/AppContext'
@@ -153,14 +154,35 @@ const SeatLayout = () => {
           </div>
         </div>
 
-        <button onClick={bookTickets} className='flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer active:scale-95'>
+
+
+        {selectedTime && selectedSeats.length > 0 && (
+          <div className='flex flex-col items-center mt-6 mb-4 font-medium'>
+            <p className='text-gray-300 text-sm'>
+              {selectedSeats.length} Seat{selectedSeats.length > 1 ? 's' : ''} selected
+            </p>
+            <p className='text-xl text-white'>
+              Total: {currencyFormat(selectedSeats.reduce((total, seat) => {
+                let price = selectedTime.price;
+                if (['C1', 'C2', 'D1', 'D2', 'E8', 'E9', 'F8', 'F9'].includes(seat)) {
+                  price -= 0.33;
+                } else if (['G1', 'G2', 'H1', 'H2', 'I8', 'I9', 'J8', 'J9'].includes(seat)) {
+                  price -= 0.55;
+                }
+                return total + price;
+              }, 0))}
+            </p>
+          </div>
+        )}
+
+        <button onClick={bookTickets} className='flex items-center gap-1 mt-2 px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer active:scale-95'>
           Proceed to Checkout
           <ArrowRightIcon strokeWidth={3} className="w-4 h-4" />
         </button>
 
 
       </div>
-    </div>
+    </div >
   ) : (
     <Loading />
   )

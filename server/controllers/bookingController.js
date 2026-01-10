@@ -41,7 +41,15 @@ export const createBooking = async (req, res) => {
         const booking = await Booking.create({
             user: userId,
             show: showId,
-            amount: showData.showPrice * selectedSeats.length,
+            amount: selectedSeats.reduce((total, seat) => {
+                let price = showData.showPrice;
+                if (['C1', 'C2', 'D1', 'D2', 'E8', 'E9', 'F8', 'F9'].includes(seat)) {
+                    price -= 0.33;
+                } else if (['G1', 'G2', 'H1', 'H2', 'I8', 'I9', 'J8', 'J9'].includes(seat)) {
+                    price -= 0.55;
+                }
+                return total + price;
+            }, 0),
             bookedSeats: selectedSeats
         })
 

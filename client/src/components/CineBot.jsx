@@ -7,7 +7,7 @@ import { useAuth } from '@clerk/clerk-react';
 const CineBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { role: 'model', text: "Hi there! I'm CineBot. Are you in the mood for some Bollywood drama or action or horror today?" }
+        { role: 'model', text: "Hi there! I'm CineBot. Are you in the mood for some Hollywood action or Bollywood drama today?" }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);

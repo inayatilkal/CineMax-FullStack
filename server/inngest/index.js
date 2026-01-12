@@ -90,6 +90,21 @@ const sendBookingConfirmationEmail = inngest.createFunction(
             populate: { path: "movie", model: "Movie" }
         }).populate('user');
 
+        if (!booking) {
+            console.error(`[Inngest] Booking not found: ${bookingId}`);
+            return;
+        }
+
+        if (!booking.user) {
+            console.error(`[Inngest] User not found for booking: ${bookingId}. Cannot send email.`);
+            return;
+        }
+
+        if (!booking.show || !booking.show.movie) {
+            console.error(`[Inngest] Show or Movie details missing for booking: ${bookingId}.`);
+            return;
+        }
+
         await sendEmail({
             to: booking.user.email,
             subject: `Payment Confirmation: "${booking.show.movie.title}" booked!`,

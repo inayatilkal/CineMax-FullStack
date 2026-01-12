@@ -47,7 +47,7 @@ const ListBookings = () => {
           </thead>
           <tbody className="text-sm font-light">
             {bookings.map((item, index) => {
-              const userName = item?.user?.name || 'Unknown User';
+              const userName = item?.user?.name || (typeof item?.user === 'string' ? item.user : 'Unknown User');
               const movieTitle = item?.show?.movie?.title || 'Unknown Movie';
               const showTime = item?.show?.showDateTime ? dateFormat(item.show.showDateTime) : 'N/A';
 

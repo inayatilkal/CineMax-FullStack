@@ -1,6 +1,8 @@
 import { inngest } from "../inngest/index.js";
 import Booking from "../models/Booking.js";
 import Show from "../models/Show.js"
+import User from "../models/User.js";
+import { clerkClient } from "../configs/clerk.js";
 import stripe from 'stripe'
 
 
@@ -32,6 +34,27 @@ export const createBooking = async (req, res) => {
 
         if (!isAvailable) {
             return res.json({ success: false, message: "Selected Seats are not available." })
+        }
+
+        // Lazy Sync: Ensure user exists in local DB
+        let user = await User.findById(userId);
+        if (!user) {
+            try {
+                const clerkUser = await clerkClient.users.getUser(userId);
+                const userData = {
+                    _id: clerkUser.id,
+                    name: `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim() || 'Unknown',
+                    email: clerkUser.emailAddresses[0]?.emailAddress || '',
+                    image: clerkUser.imageUrl || ''
+                };
+                user = await User.create(userData);
+                console.log(`[Lazy Sync] Created user: ${user.name}`);
+            } catch (syncError) {
+                console.error("[Lazy Sync] Error syncing user:", syncError);
+                // Continue? If we fail to create the user, the booking might fail due to populate issues later or foreign key constraints (if any).
+                // But Booking model "user" is just a String ref, so it might save but still show Unknown.
+                // We'll proceed but log the error.
+            }
         }
 
         // Get the show details

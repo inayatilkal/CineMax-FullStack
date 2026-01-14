@@ -111,9 +111,9 @@
    ```bash
    Link : https://www.inngest.com
    ```
-   -Set Admin :
+   -Set Admin : set admin role in clerk private metadata,
    ```bash
-    set admin role in clerk private metadata, “role”:”admin”
+     “role”:”admin”
    ```
    -Setup Stripe,
    ```bash

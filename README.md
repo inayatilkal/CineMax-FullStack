@@ -1,3 +1,6 @@
+<img width="1343" height="600" alt="home" src="https://github.com/user-attachments/assets/defa525a-dbe2-47ce-9957-f3dec82fd31d" />
+
+
 
 *CineMax* is a full-stack movie ticket booking platform developed using the *MERN stack* (MongoDB, Express, React, Node.js). It includes a complete user and admin experience, secure payment integration, and an AI-powered chatbot for movie recommendations.
 
@@ -163,5 +166,3 @@ Feel free to open issues or pull requests.
 📝 License
 
 This project is for educational/demo purposes.
-
-```

@@ -82,33 +82,64 @@
 
 4. *Setup `.env` files in server folders* with:
    Open Project Folder In VS Code
-   -Setup The MongoDB & obtain MongoURI, Link : https://www.mongodb.com/cloud/atlas/register. Add mongoDB URI in “ .env ” file of server folder
-   -Setup TMDB, Link : https://www.themoviedb.org
-   -Setup Brevo ( For Email Feature ), Link : https://www.brevo.com
-   -Setup Inngest Keys (add both event key and signin key in .env), Link : https://www.inngest.com
-   -Setup Clerk (add both clerk publishable key and secret key in .env and also add clerk publishable key in client folder .env file), Link : https://clerk.com
-   -Setup Clerk Webhooks, Link : https://dashboard.clerk.com
-   -Sync App On Inngest, Link : https://www.inngest.com
-   -Set Admin : set admin role in clerk private metadata, “role”:”admin”
-   -Setup Stripe, Link : https://dashboard.stripe.com/register
-   -setup Gemini free API, Link : https://aistudio.google.com/app/api-keys
+   -Setup The MongoDB & obtain MongoURI,
+   ```bash
+   Link : https://www.mongodb.com/cloud/atlas/register
+   ```
+   . Add mongoDB URI in “ .env ” file of server folder
+   -Setup TMDB,
+   ```bash
+    Link : https://www.themoviedb.org
+   ```
+   -Setup Brevo ( For Email Feature ),
+   ```bash
+    Link : https://www.brevo.com
+   ```
+   -Setup Inngest Keys (add both event key and signin key in .env),
+   ```bash
+   Link : https://www.inngest.com
+   ```
+   -Setup Clerk (add both clerk publishable key and secret key in .env and also add clerk publishable key in client folder .env file),
+   ```bash
+   Link : https://clerk.com
+   ```
+   -Setup Clerk Webhooks,
+   ```bash
+   Link : https://dashboard.clerk.com
+   ```
+   -Sync App On Inngest,
+   ```bash
+   Link : https://www.inngest.com
+   ```
+   -Set Admin :
+   ```bash
+    set admin role in clerk private metadata, “role”:”admin”
+   ```
+   -Setup Stripe,
+   ```bash
+    Link : https://dashboard.stripe.com/register
+   ```
+   -setup Gemini free API,
+   ```bash
+   Link : https://aistudio.google.com/app/api-keys
+   ```
 
-5. *setup `.env` files in client folders* with:
+6. *setup `.env` files in client folders* with:
    Open project folder in VS Code
    -Copy the clerk publishable key from server folder in .env file and paste it in client folder in .env file
 
 
-6. *Run inngest in server folder:*
+7. *Run inngest in server folder:*
    ```bash
    npm run inngest
    ```
 
-7. *Run backend:*
+8. *Run backend:*
    ```bash
    npm run server
    ```
 
-8. *Run frontend:*
+9. *Run frontend:*
    ```bash
    npm run dev
    ```

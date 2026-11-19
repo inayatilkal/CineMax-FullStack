@@ -19,6 +19,7 @@ import { SignIn } from '@clerk/clerk-react'
 import Loading from './components/Loading'
 import CineBot from './components/CineBot'
 
+
 const App = () => {
 
   const isAdminRoute = useLocation().pathname.startsWith('/admin')
